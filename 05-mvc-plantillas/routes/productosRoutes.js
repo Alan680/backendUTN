@@ -2,25 +2,30 @@ const express = require('express');
 
 //instanciamos un enrutador
 const router = express.Router();
-//get productos
 
-//traemos la info
-//const productos = require('../model/productos');
+//importamos el controlador
+const productosController = require('../controllers/productosController');
 
-const productosContrller = require('../controllers/productosController');
-
-const{
+const {
     postProducto,
+    putProducto,
+    getProductosId,
     deleteProducto,
-    putProducto
 } = require('../controllers/productosController');
 
-router.get("/listar", getProducto);
+//traemos la info de la database
+//const productos = require('../model/productos');
 
-router.post("/guardar",  postProducto);
+//get productos
+router.get('/listar', productosController.getProductos);
 
-router.put("/modificar", putProducto);
+router.get('/listar/:id', getProductosId);
 
-router.delete("/borrar", deleteProducto);
+router.post('/guardar', postProducto);
+
+router.put('/modificar', putProducto);
+
+router.delete('/borrar/:id', deleteProducto);
+
 
 module.exports = router;
